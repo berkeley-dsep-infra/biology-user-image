@@ -161,13 +161,20 @@ RUN apt-get update -qq --yes && \
     apt-get install --yes  -qq \
         libcurl4-openssl-dev > /dev/null
 
-COPY install-miniforge.bash /tmp/install-miniforge.bash
-RUN chmod 777 /tmp/install-miniforge.bash
-RUN /tmp/install-miniforge.bash
-RUN rm /tmp/install-miniforge.bash
+USER root
+# Create user owned conda dir
+# This lets users temporarily install packages
+RUN install -d -o ${NB_USER} -g ${NB_USER} ${CONDA_DIR}
 
+# Install conda environment as our user
 USER ${NB_USER}
 
+# Install conda 
+COPY --chown=${NB_USER}:${NB_USER} install-miniforge.bash /tmp/install-miniforge.bash
+RUN /tmp/install-miniforge.bash
+
+# Install Conda packages
+ENV PATH=${CONDA_DIR}/bin:$PATH
 COPY environment.yml /tmp/
 
 RUN mamba env update -q -p ${CONDA_DIR} -f /tmp/environment.yml && \
