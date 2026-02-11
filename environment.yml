@@ -3,7 +3,6 @@ channels:
   - conda-forge
 
 dependencies:
-  - conda
   # Items required for basic level functionality
   - gh-scoped-creds==4.1
   # DH-418, bunch of stuff fails to install if git is set higher to this e.g. git==2.47.1
@@ -25,7 +24,6 @@ dependencies:
   - python==3.11.*
 
   # Package to allow Jupyter Notebook or JupyterLab applications in one conda env to access other kernels (e.g. qiime2)
-  - nb_conda_kernels==2.5.1
   - jupyter-rsession-proxy==2.3.0
 
   # Packages from bioconda for IB134L
