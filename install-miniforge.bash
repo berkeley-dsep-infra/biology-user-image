@@ -8,6 +8,8 @@ MINIFORGE_VERSION='24.11.2-1'
 URL="https://github.com/conda-forge/miniforge/releases/download/${MINIFORGE_VERSION}/Miniforge3-${MINIFORGE_VERSION}-Linux-x86_64.sh"
 INSTALLER_PATH=/tmp/miniforge-installer.sh
 
+export XDG_CACHE_HOME=$(mktemp)
+
 wget --quiet $URL -O ${INSTALLER_PATH}
 chmod +x ${INSTALLER_PATH}
 
@@ -31,8 +33,6 @@ conda clean --all -f -y
 rm ${INSTALLER_PATH}
 
 # Remove the pip cache created as part of installing mambaforge
-rm -rf /root/.cache
-
-chown -Rh $NB_USER:$NB_USER ${CONDA_DIR}
+rm -rf ${XDG_CACHE_HOME}
 
 conda list -n root
