@@ -171,7 +171,7 @@ USER ${NB_USER}
 
 # Install conda 
 COPY --chown=${NB_USER}:${NB_USER} install-miniforge.bash /tmp/install-miniforge.bash
-RUN /tmp/install-miniforge.bash
+RUN bash /tmp/install-miniforge.bash
 
 # Install Conda packages
 ENV PATH=${CONDA_DIR}/bin:$PATH
