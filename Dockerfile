@@ -12,7 +12,6 @@ ENV NB_UID=1000
 
 ENV CONDA_DIR=/srv/conda
 ENV R_LIBS_USER=/srv/r
-ENV CONDA_NO_PLUGINS=true
 
 # Explicitly add littler to PATH
 # See https://github.com/conda-forge/r-littler-feedstock/issues/6
