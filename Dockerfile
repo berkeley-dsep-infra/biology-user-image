@@ -178,7 +178,7 @@ ENV PATH=${CONDA_DIR}/bin:$PATH
 COPY environment.yml /tmp/
 
 RUN mamba env create -n notebook -f /tmp/environment.yml && \
-    mamba clean -afy && 
+    mamba clean -afy
 
 ENV PATH=${CONDA_DIR}/envs/notebook/bin:$PATH
 
