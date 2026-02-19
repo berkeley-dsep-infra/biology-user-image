@@ -177,8 +177,10 @@ RUN bash /tmp/install-miniforge.bash
 ENV PATH=${CONDA_DIR}/bin:$PATH
 COPY environment.yml /tmp/
 
-RUN mamba env update -q -p ${CONDA_DIR} -f /tmp/environment.yml && \
-    mamba clean -afy
+RUN mamba env create -n notebook -f /tmp/environment.yml && \
+    mamba clean -afy && 
+
+ENV PATH=${CONDA_DIR}/envs/notebook/bin:$PATH
 
 USER root
 RUN rm /tmp/environment.yml 
